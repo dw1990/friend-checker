@@ -1,0 +1,27 @@
+html, body, app-root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    padding: 0px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Adds space between form fields */
+    margin-top:0px;
+  }
+
+  .table-container {
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  .table{
+    height: 400px;
+  }
+
+  .tile{
+    margin:8px;
+  }
