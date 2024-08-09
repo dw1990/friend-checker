@@ -135,6 +135,8 @@ export class AppComponent {
         const jsonData = JSON.parse(e.target.result);
         this.friends = jsonData.friends || [];
         this.traits = jsonData.traits || [];
+        this.dataSource.data = this.friends;
+        this.updateDisplayedColumns();
       };
       reader.readAsText(file);
     }

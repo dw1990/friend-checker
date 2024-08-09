@@ -1,6 +1,6 @@
-<mat-grid-list cols="3" rowHeight="500px">    
-    <mat-grid-tile [colspan]="2" class="table-tile tile">
-        <div class="container">            
+<mat-grid-list cols="3" rowHeight="600px">    
+    <mat-grid-tile [colspan]="2">
+        <div class="friends-tile container">            
             <div class="table-container">
                 <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
                     <!-- Name Column -->
@@ -40,15 +40,7 @@
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                   </mat-table>
-             </div>
-             <div class="add-friend-form">
-                <mat-form-field appearance="fill">
-                  <input matInput [(ngModel)]="friendNameToAdd" placeholder="Name">
-                </mat-form-field>
-                <button mat-flat-button color="primary" (click)="addFriend()">Person hinzufügen</button>
-            </div>
-            <!-- Download and Upload Buttons -->
-           
+             </div>           
         </div>
         
     </mat-grid-tile>
@@ -63,25 +55,28 @@
         </mat-form-field>
         
         <button mat-flat-button color="primary" (click)="addTrait()">Hinzufügen</button>
-        <mat-list>
-            @for(trait of traits; track trait){
-                <mat-list-item>
-                    <span>
-                        {{trait.name}} - {{trait.weight}}
-                        <button mat-icon-button class="delete-button" (click)="removeTrait(trait.name)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </span>
-                    
+        <div class="trait-badge-container">
+          <div class="trait-badge" *ngFor="let trait of traits; let i = index">
+              {{ trait.name }} - {{ trait.weight }}
+              <button mat-icon-button class="delete-button" (click)="removeTrait(trait.name)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+          </div>
+      </div>
 
-                </mat-list-item>
-            }
-        </mat-list>
+        <div class="add-friend-form">
+          <mat-form-field appearance="fill">
+            <input matInput [(ngModel)]="friendNameToAdd" placeholder="Name">
+          </mat-form-field>
+          <button mat-flat-button color="primary" (click)="addFriend()">Person hinzufügen</button>
+      </div>
      </div>
         
     </mat-grid-tile>
 </mat-grid-list>
-<div>
-  <button mat-button (click)="downloadJson()" color="primary">Download JSON</button>
-  <input type="file" (change)="onFileChange($event)" accept=".json" style="margin-left: 10px;">
+<hr class="separator">
+<div style="margin-top: 20px; text-align: center;">
+  <button mat-button (click)="downloadJson()" color="primary">Einstellungen herunterladen</button>
+  <input type="file" id="file-upload" (change)="onFileChange($event)" accept=".json" style="margin-left: 10px;"> 
 </div>
+  
