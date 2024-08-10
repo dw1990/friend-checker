@@ -1,0 +1,12 @@
+<div style="margin-top: 20px; text-align: center">
+    <button mat-button (click)="downloadJson()" color="primary">
+      Einstellungen herunterladen
+    </button>
+    <input
+      type="file"
+      id="file-upload"
+      (change)="onFileChange($event)"
+      accept=".json"
+      style="margin-left: 10px"
+    />
+  </div>

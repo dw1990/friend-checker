@@ -1,82 +1,103 @@
-<mat-grid-list cols="3" rowHeight="600px">    
-    <mat-grid-tile [colspan]="2">
-        <div class="friends-tile container">            
-            <div class="table-container">
-                <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                      <mat-cell *matCellDef="let friend">
-                        {{ friend.name }}
-                      </mat-cell>
-                    </ng-container>
-                
-                    <!-- Dynamic Trait Columns -->
-                    <ng-container *ngFor="let trait of traits" [matColumnDef]="trait.name">
-                      <mat-header-cell *matHeaderCellDef> {{ trait.name }} </mat-header-cell>
-                      <mat-cell *matCellDef="let friend">
-                        <input matInput [(ngModel)]="friend[trait.name]" type="number" min="-10" max="10">
-                      </mat-cell>
-                    </ng-container>
-                
-                    <!-- Action Column (Delete Friend) -->
-                    <ng-container matColumnDef="actions">
-                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                      <mat-cell *matCellDef="let friend">
-                        <button mat-icon-button color="warn" (click)="removeFriend(friend.name)">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                      </mat-cell>
-                    </ng-container>
+<mat-grid-list cols="3" rowHeight="600px">
+  <mat-grid-tile [colspan]="2">
+    <div class="friends-tile container">
+      <div class="table-container">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let friend">
+              {{ friend.name }}
+            </mat-cell>
+          </ng-container>
 
-                    <ng-container matColumnDef="sum">
-                        <mat-header-cell *matHeaderCellDef> Summe </mat-header-cell>
-                        <mat-cell *matCellDef="let friend">
-                            {{calculateFriendSum(friend)}}
-                        </mat-cell>
-                    </ng-container>
-                
-                    <!-- Header and Row Definitions -->
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                  </mat-table>
-             </div>           
-        </div>
-        
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="1" class="traits-tile tile">
-     <div class="container">
-        <mat-form-field appearance="fill">
-            <input matInput [(ngModel)]="traitNameToAdd" placeholder="Eigenschaft">
-        </mat-form-field>
-   
-        <mat-form-field appearance="fill">
-            <input matInput [(ngModel)]="traitWeightToAdd" type="number" min="-10" max="10">
-        </mat-form-field>
-        
-        <button mat-flat-button color="primary" (click)="addTrait()">Hinzufügen</button>
-        <div class="trait-badge-container">
-          <div class="trait-badge" *ngFor="let trait of traits; let i = index">
-              {{ trait.name }} - {{ trait.weight }}
-              <button mat-icon-button class="delete-button" (click)="removeTrait(trait.name)">
-                  <mat-icon>delete</mat-icon>
+          <!-- Dynamic Trait Columns -->
+          <ng-container
+            *ngFor="let trait of traits"
+            [matColumnDef]="trait.name"
+          >
+            <mat-header-cell *matHeaderCellDef>
+              {{ trait.name }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let friend">
+              <input
+                matInput
+                [(ngModel)]="friend[trait.name]"
+                type="number"
+                min="-10"
+                max="10"
+              />
+            </mat-cell>
+          </ng-container>
+
+          <!-- Action Column (Delete Friend) -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let friend">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="removeFriend(friend.name)"
+              >
+                <mat-icon>delete</mat-icon>
               </button>
-          </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sum">
+            <mat-header-cell *matHeaderCellDef> Summe </mat-header-cell>
+            <mat-cell *matCellDef="let friend">
+              {{ calculateFriendSum(friend) }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header and Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" class="traits-tile tile">
+    <div class="container">
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          [(ngModel)]="traitNameToAdd"
+          placeholder="Eigenschaft"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input
+          matInput
+          [(ngModel)]="traitWeightToAdd"
+          type="number"
+          min="-10"
+          max="10"
+        />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="addTrait()">
+        Hinzufügen
+      </button>
+      <div class="trait-badge-container">
+        <div class="trait-badge" *ngFor="let trait of traits; let i = index">
+          {{ trait.name }} - {{ trait.weight }}
+          <button
+            mat-icon-button
+            class="delete-button"
+            (click)="removeTrait(trait.name)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
 
-        <div class="add-friend-form">
-          <mat-form-field appearance="fill">
-            <input matInput [(ngModel)]="friendNameToAdd" placeholder="Name">
-          </mat-form-field>
-          <button mat-flat-button color="primary" (click)="addFriend()">Person hinzufügen</button>
-      </div>
-     </div>
-        
-    </mat-grid-tile>
+      <app-add-friends (friendAdded)="addFriend($event)"></app-add-friends>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
-<hr class="separator">
-<div style="margin-top: 20px; text-align: center;">
-  <button mat-button (click)="downloadJson()" color="primary">Einstellungen herunterladen</button>
-  <input type="file" id="file-upload" (change)="onFileChange($event)" accept=".json" style="margin-left: 10px;"> 
-</div>
-  
+<hr class="separator" />
+<app-file-footer (dataLoaded)="onFileChange($event)"></app-file-footer>
+
