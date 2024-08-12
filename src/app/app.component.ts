@@ -13,11 +13,6 @@ export class AppComponent {
   friends: Array<Friend> = [];
   traits: Array<Trait> = [];
 
-  dataSource = new MatTableDataSource(this.friends);
-
-  traitNameToAdd = '';
-  traitWeightToAdd = 0;
-
   displayedColumns: string[] = [
     'name',
     ...this.traits.map((trait) => trait.name),
@@ -25,42 +20,20 @@ export class AppComponent {
     'actions',
   ];
 
-  addTrait() {
-    if (this.traits.find((trait) => trait.name === this.traitNameToAdd)) {
-      return;
-    }
-
-    if (this.traitNameToAdd === '') {
-      return;
-    }
-
+  addTrait(trait: Trait) {
     this.traits.push({
-      name: this.traitNameToAdd,
-      weight: this.traitWeightToAdd,
+      name: trait.name,
+      weight: trait.weight,
     });
 
-    this.friends.forEach((friend) => (friend[this.traitNameToAdd] = 0));
-
-    this.traitNameToAdd = '';
-    this.traitWeightToAdd = 0;
-
-    this.updateDisplayedColumns();
-  }
-
-  updateDisplayedColumns() {
-    this.displayedColumns = [
-      'name',
-      ...this.traits.map((trait) => trait.name),
-      'sum',
-      'actions',
-    ];
+    this.friends.forEach((friend) => (friend[trait.name] = 0));
   }
 
   addFriend(friendName: string) {
     if (this.friends.find((friend) => friend.name === friendName)) {
       return;
     }
-
+    console.log(friendName);
     let friend: { name: string; [key: string]: any } = { name: friendName };
 
     this.traits.forEach((trait) => {
@@ -68,12 +41,11 @@ export class AppComponent {
     });
 
     this.friends.push(friend);
-    this.dataSource.data = this.friends;
+    this.friends = [...this.friends];
   }
 
   removeFriend(name: string) {
     this.friends = this.friends.filter((friend) => friend.name !== name);
-    this.dataSource.data = this.friends;
   }
 
   removeTrait(name: string) {
@@ -84,31 +56,10 @@ export class AppComponent {
     this.friends.forEach((friend) => {
       delete friend[name];
     });
-    this.dataSource.data = this.friends; // Update the data source
-    this.updateDisplayedColumns();
-  }
-
-  calculateFriendSum(friend: Friend) {
-    if (!friend) {
-      return 0;
-    }
-
-    let totalScore = 0;
-
-    this.traits.forEach((trait) => {
-      const value = friend[trait.name];
-      const weightedValue = value * trait.weight;
-
-      totalScore += weightedValue;
-    });
-
-    return totalScore;
   }
 
   onFileChange(loadedData: any) {
-    this.friends = loadedData.friends || [];
-    this.traits = loadedData.traits || [];
-    this.dataSource.data = this.friends;
-    this.updateDisplayedColumns();
+    this.friends = loadedData.friends;
+    this.traits = loadedData.traits;
   }
 }

@@ -1,1 +1,55 @@
-<p>friends-table works!</p>
+<div class="table-container">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let friend">
+          {{ friend.name }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Dynamic Trait Columns -->
+      <ng-container
+        *ngFor="let trait of _traits"
+        [matColumnDef]="trait.name"
+      >
+        <mat-header-cell *matHeaderCellDef>
+          {{ trait.name }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let friend">
+          <input
+            matInput
+            [(ngModel)]="friend[trait.name]"
+            type="number"
+            min="-10"
+            max="10"
+          />
+        </mat-cell>
+      </ng-container>
+
+      <!-- Action Column (Delete Friend) -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let friend">
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="removeFriend(friend.name)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sum">
+        <mat-header-cell *matHeaderCellDef> Summe </mat-header-cell>
+        <mat-cell *matCellDef="let friend">
+          {{ calculateFriendSum(friend) }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>

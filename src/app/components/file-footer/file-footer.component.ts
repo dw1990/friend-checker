@@ -38,10 +38,9 @@ export class FileFooterComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         const jsonData = JSON.parse(e.target.result);
-        this.friends = jsonData.friends || [];
-        this.traits = jsonData.traits || [];
 
-        this.dataLoaded.emit({friends: this.friends, traits: this.traits})
+        this.dataLoaded.emit({friends: jsonData.friends || [], traits: jsonData.traits || []})
+        console.log(jsonData.traits)
       };
       reader.readAsText(file);
     }

@@ -1,1 +1,35 @@
-<p>traits-container works!</p>
+<mat-form-field appearance="fill">
+    <input
+      matInput
+      [(ngModel)]="traitNameToAdd"
+      placeholder="Eigenschaft"
+      (keydown.enter)="addTrait()"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      [(ngModel)]="traitWeightToAdd"
+      type="number"
+      min="-10"
+      max="10"
+      (keydown.enter)="addTrait()"
+    />
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" (click)="addTrait()">
+    Hinzufügen
+  </button>
+  <div class="trait-badge-container">
+    <div class="trait-badge" *ngFor="let trait of traits; let i = index">
+      {{ trait.name }} - {{ trait.weight }}
+      <button
+        mat-icon-button
+        class="delete-button"
+        (click)="removeTrait(trait.name)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
