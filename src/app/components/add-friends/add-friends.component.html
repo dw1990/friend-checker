@@ -1,6 +1,11 @@
-<div class="add-friend-form">
-    <mat-form-field appearance="fill">
-      <input matInput [(ngModel)]="name" placeholder="Name"  (keydown.enter)="addFriend()">
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="addFriend()">Person hinzufügen</button>
-  </div>
+<mat-form-field class="add-friend-input">
+  <input
+    matInput
+    [(ngModel)]="name"
+    placeholder="Name"
+    (keydown.enter)="addFriend()"
+  />
+</mat-form-field>
+<button mat-flat-button color="primary" class="add-friend-button" (click)="addFriend()">
+  Person hinzufügen
+</button>

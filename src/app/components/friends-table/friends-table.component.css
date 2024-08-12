@@ -7,3 +7,14 @@
   .delete-button mat-icon {
     font-size: 16px; /* Size of the delete icon */
   }
+
+  mat-table{
+    height: 580px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-shadow: NONE;
+  }
+
+  .smiley{
+    font-size: 24px;
+  }

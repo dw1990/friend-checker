@@ -13,5 +13,6 @@ export class AddFriendsComponent {
 
   addFriend() {
     this.friendAdded.emit(this.name);
+    this.name="";
   }
 }

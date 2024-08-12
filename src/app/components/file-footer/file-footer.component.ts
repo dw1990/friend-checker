@@ -17,6 +17,7 @@ export class FileFooterComponent {
   }> = new EventEmitter();
 
   downloadJson() {
+    console.log(this.traits)
     const data = {
       friends: this.friends,
       traits: this.traits,

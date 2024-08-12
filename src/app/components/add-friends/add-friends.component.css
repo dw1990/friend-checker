@@ -1,5 +1,9 @@
-.add-friend-form {
-    display: flex;
-    width: 100%;
-    gap: 8px;
-  }
+.add-friend-input{
+  width: 350px;
+}
+
+.add-friend-button{
+  margin-left: 8px;
+  width: 250px;
+  height: 56px;
+}

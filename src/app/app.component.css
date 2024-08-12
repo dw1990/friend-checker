@@ -1,23 +1,13 @@
-html, body, app-root {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-}
-
-  .table-container {
+  .tile-container {
     height: 600px;
     width: 100%;
     overflow-y: auto;
     padding:0px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   mat-grid-tile{
     border:1px #f6f6f6;
   }
-
-.add-friend-form button {
-  flex-shrink: 0; /* Prevents the button from shrinking */
-  height: 56px; /* Matches the height of the input field */
-  line-height: 56px; /* Centers text vertically */
-  min-width: 150px; /* Ensures a minimum width for the button */
-}

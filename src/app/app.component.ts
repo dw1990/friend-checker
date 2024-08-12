@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { Trait } from './trait';
 import { Friend } from './friend';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +26,7 @@ export class AppComponent {
     });
 
     this.friends.forEach((friend) => (friend[trait.name] = 0));
+    this.traits = [...this.traits]
   }
 
   addFriend(friendName: string) {

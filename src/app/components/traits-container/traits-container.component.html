@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill">
+<mat-form-field class="add-trait-input" subscriptSizing="dynamic">
     <input
       matInput
       [(ngModel)]="traitNameToAdd"
@@ -6,29 +6,24 @@
       (keydown.enter)="addTrait()"
     />
   </mat-form-field>
+<div>
+  <mat-radio-group [(ngModel)]="selectedImpact">
+    <mat-radio-button *ngFor="let impact of impacts" [value]="impact.value">{{impact.displayText}}</mat-radio-button>
+  </mat-radio-group>
+</div>
+  <div>
+    <button mat-flat-button color="primary" (click)="addTrait()" class="add-trait-button">
+      Hinzufügen
+    </button>
+  </div>  
 
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [(ngModel)]="traitWeightToAdd"
-      type="number"
-      min="-10"
-      max="10"
-      (keydown.enter)="addTrait()"
-    />
-  </mat-form-field>
-
-  <button mat-flat-button color="primary" (click)="addTrait()">
-    Hinzufügen
-  </button>
   <div class="trait-badge-container">
     <div class="trait-badge" *ngFor="let trait of traits; let i = index">
-      {{ trait.name }} - {{ trait.weight }}
+      {{ trait.name }} <i class="fa-solid thumb-icon" [ngClass]="[getColor(trait.weight), getThumbsIcon(trait.weight)]"></i>
       <button
         mat-icon-button
         class="delete-button"
-        (click)="removeTrait(trait.name)"
-      >
+        (click)="removeTrait(trait.name)"      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>

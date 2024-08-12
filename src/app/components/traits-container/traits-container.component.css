@@ -1,22 +1,57 @@
 .trait-badge-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows badges to wrap to the next line */
-    gap: 4px; /* Space between badges */
-    height: 200px; /* Fixed height for the container, adjust as needed */
-    overflow-y: auto; /* Enables vertical scrolling if content overflows */
-    padding: 8px; /* Optional padding inside the container */
-    border: 1px solid #ccc; /* Optional border to define the container's edges */
-    border-radius: 8px; /* Rounded corners for the container */
-    background-color: #f5f5f5; /* Background color for the container */
-  }
-  
-  .trait-badge {
-    display: flex;
-    align-items: center;
-    background-color: #e0e0e0; /* Light gray background */
-    border-radius: 16px; /* Rounded corners */
-    padding: 8px 12px; /* Padding inside the badge */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
-    white-space: nowrap; /* Prevents text from wrapping inside the badge */
-    height: 30px;
-  }
+  display: flex;
+  flex-wrap: wrap; /* Allows badges to wrap to the next line */
+  gap: 2px 4px; /* Space between badges */
+  height: 200px; /* Fixed height for the container, adjust as needed */
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+  margin: 8px 0px;
+  padding: 8px; /* Optional padding inside the container */
+  border: 1px solid #ccc; /* Optional border to define the container's edges */
+  border-radius: 8px; /* Rounded corners for the container */
+  background-color: #f5f5f5; /* Background color for the container */
+}
+
+.trait-badge {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0; /* Light gray background */
+  border-radius: 16px; /* Rounded corners */
+  padding: 8px 8px; /* Padding inside the badge */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+  white-space: nowrap; /* Prevents text from wrapping inside the badge */
+  height: 30px;
+  font-size: 24px;
+  line-height: 20px;
+}
+
+.add-trait-button {
+  width: 350px;
+}
+
+.add-trait-input {
+  width: 350px;
+  margin-bottom: 0px;
+}
+
+.red {
+  color: rgb(167, 41, 32);
+}
+.orange {
+  color: rgb(236, 190, 38);
+}
+
+.yellow {
+  color: rgb(175, 226, 92);
+}
+
+.green {
+  color: rgb(39, 179, 0);
+}
+
+.grey{
+  color: gray;
+}
+
+.thumb-icon{
+  margin-left:8px
+}

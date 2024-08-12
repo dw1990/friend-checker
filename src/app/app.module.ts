@@ -16,6 +16,7 @@ import { FriendsTableComponent } from './components/friends-table/friends-table.
 import { TraitsContainerComponent } from './components/traits-container/traits-container.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [AppComponent, AddFriendsComponent, FileFooterComponent, FriendsTableComponent, TraitsContainerComponent],
@@ -28,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule, 
     MatButtonModule, 
     FormsModule, 
+    MatRadioModule,
     MatIconModule,
     MatTableModule, 
     CommonModule,
