@@ -21,8 +21,8 @@
             matInput
             [(ngModel)]="friend[trait.name]"
             type="number"
-            min="-10"
-            max="10"
+            min="-5"
+            max="5"
           />
           <mat-checkbox *ngIf="trait.weight === 0" [(ngModel)]="friend[trait.name]"></mat-checkbox>
         </mat-cell>
