@@ -6,13 +6,14 @@
       (keydown.enter)="addTrait()"
     />
   </mat-form-field>
+  <mat-checkbox [(ngModel)]="isNoGo">No-Go!</mat-checkbox>
 <div>
   <mat-radio-group [(ngModel)]="selectedImpact">
     <mat-radio-button *ngFor="let impact of impacts" [value]="impact.value">{{impact.displayText}}</mat-radio-button>
   </mat-radio-group>
 </div>
   <div>
-    <button mat-flat-button color="primary" (click)="addTrait()" class="add-trait-button">
+    <button [disabled]="!canAdd()" mat-flat-button color="primary" (click)="addTrait()" class="add-trait-button">
       Hinzufügen
     </button>
   </div>  

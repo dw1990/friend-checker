@@ -17,13 +17,14 @@
           {{ trait.name }}
         </mat-header-cell>
         <mat-cell *matCellDef="let friend">
-          <input
+          <input *ngIf="trait.weight !== 0"
             matInput
             [(ngModel)]="friend[trait.name]"
             type="number"
             min="-10"
             max="10"
           />
+          <mat-checkbox *ngIf="trait.weight === 0" [(ngModel)]="friend[trait.name]"></mat-checkbox>
         </mat-cell>
       </ng-container>
 

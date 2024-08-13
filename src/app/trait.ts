@@ -1,4 +1,5 @@
 export interface Trait{
     name: string,
-    weight: number
+    weight: number,
+    isNoGo: boolean;
 }

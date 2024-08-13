@@ -23,9 +23,18 @@ export class AppComponent {
     this.traits.push({
       name: trait.name,
       weight: trait.weight,
+      isNoGo: trait.isNoGo
     });
 
-    this.friends.forEach((friend) => (friend[trait.name] = 0));
+    this.friends.forEach((friend) => 
+    {
+      if(trait.isNoGo){
+        friend[trait.name] = false
+      }else{
+        friend[trait.name] = 0
+      }
+    }
+  );
     this.traits = [...this.traits]
   }
 

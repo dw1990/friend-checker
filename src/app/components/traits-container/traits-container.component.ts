@@ -18,7 +18,8 @@ getThumbsIcon(weight: number): string {
 }
 
   traitNameToAdd =  "";
-  selectedImpact: number = 3;
+  selectedImpact: number = 0;
+  isNoGo: boolean = false;
 
   @Input() traits: Array<Trait> = [];
 
@@ -85,6 +86,7 @@ getThumbsIcon(weight: number): string {
     this.traitAdded.emit({
       name: this.traitNameToAdd,
       weight: this.selectedImpact,
+      isNoGo: this.isNoGo
     });
 
     this.resetInputs();
@@ -92,6 +94,11 @@ getThumbsIcon(weight: number): string {
 
   private resetInputs() {
     this.traitNameToAdd = "";
-    this.selectedImpact = 3;
+    this.selectedImpact = 0;
+    this.isNoGo = false;
+  }
+
+  canAdd(): boolean{
+    return this.isNoGo || this.selectedImpact !== 0;
   }
 }

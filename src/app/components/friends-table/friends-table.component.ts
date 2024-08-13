@@ -51,6 +51,11 @@ export class FriendsTableComponent {
     if (!this._traits) {
       return '';
     }
+
+    if (this.hasANoGoTrait(friend)) {
+      return 'fa-triangle-exclamation';
+    }
+
     const maxScore = this._traits.length * 10 * this.getWeightAvg(); //7 is max weight, 10 max value
 
     let totalScore = 0;
@@ -72,6 +77,21 @@ export class FriendsTableComponent {
     }
 
     return 'fa-face-smile';
+  }
+
+  hasANoGoTrait(friend: Friend): boolean {
+    const values = Object.values(friend);
+
+    for (const key in friend) {
+      if (friend.hasOwnProperty(key)) {
+        const value = friend[key];
+        if (typeof value == 'boolean' && value === true) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   getWeightAvg(): number {
