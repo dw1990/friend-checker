@@ -1,7 +1,7 @@
 .trait-badge-container {
   display: flex;
   flex-wrap: wrap; /* Allows badges to wrap to the next line */
-  gap: 2px 4px; /* Space between badges */
+  gap: 0px 8px; /* Space between badges */
   height: 200px; /* Fixed height for the container, adjust as needed */
   overflow-y: auto; /* Enables vertical scrolling if content overflows */
   margin: 8px 0px;

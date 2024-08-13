@@ -13,9 +13,7 @@ interface Impact{
   styleUrl: './traits-container.component.css',
 })
 export class TraitsContainerComponent {
-getThumbsIcon(weight: number): string {
-  return weight > 0? 'fa-thumbs-up':'fa-thumbs-down';
-}
+
 
   traitNameToAdd =  "";
   selectedImpact: number = 0;
@@ -31,11 +29,11 @@ getThumbsIcon(weight: number): string {
     value: -7
   },
   {
-    displayText: 'tut mir nicht gut',
+    displayText: 'Tut mir nicht gut',
     value: -3
   },
   {
-    displayText: 'tut mir gut',
+    displayText: 'Tut mir gut',
     value: 3
   },
   {
@@ -49,20 +47,24 @@ getThumbsIcon(weight: number): string {
     "-7":"dark-red"
   }
 
-  getColor(weight: number) {
-    if(weight === 3){
+  getColor(trait: Trait) {
+    if(trait.isNoGo){
+      return "red";
+    }
+
+    if(trait.weight === 3){
       return 'yellow'
     }
 
-    if(weight === 7){
+    if(trait.weight === 7){
       return 'green'
     }
 
-    if(weight === -3){
+    if(trait.weight === -3){
       return 'orange'
     }
 
-    if(weight === -7){
+    if(trait.weight === -7){
       return 'red'
     }
 
@@ -100,5 +102,13 @@ getThumbsIcon(weight: number): string {
 
   canAdd(): boolean{
     return this.isNoGo || this.selectedImpact !== 0;
+  }
+
+  getIcon(trait: Trait): string {
+    if(trait.isNoGo){
+      return "fa-triangle-exclamation"
+    }
+  
+    return trait.weight > 0? 'fa-thumbs-up':'fa-thumbs-down';
   }
 }

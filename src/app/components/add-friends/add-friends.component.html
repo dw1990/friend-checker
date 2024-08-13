@@ -6,6 +6,6 @@
     (keydown.enter)="addFriend()"
   />
 </mat-form-field>
-<button mat-flat-button color="primary" class="add-friend-button" (click)="addFriend()">
+<button [disabled]="name ===''" mat-flat-button color="primary" class="add-friend-button" (click)="addFriend()">
   Person hinzufügen
 </button>

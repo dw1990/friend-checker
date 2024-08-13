@@ -20,7 +20,7 @@
 
   <div class="trait-badge-container">
     <div class="trait-badge" *ngFor="let trait of traits; let i = index">
-      {{ trait.name }} <i class="fa-solid thumb-icon" [ngClass]="[getColor(trait.weight), getThumbsIcon(trait.weight)]"></i>
+      {{ trait.name }} <i class="fa-solid thumb-icon" [ngClass]="[getColor(trait), getIcon(trait)]"></i>
       <button
         mat-icon-button
         class="delete-button"

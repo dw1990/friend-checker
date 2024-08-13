@@ -73,7 +73,7 @@ export class FriendsTableComponent {
       return 'fa-face-sad-tear';
     }
     if (friendScore < 0.55) {
-      return 'fa-face-sad-tear';
+      return 'fa-face-meh';
     }
 
     return 'fa-face-smile';
@@ -97,7 +97,7 @@ export class FriendsTableComponent {
   getWeightAvg(): number {
     if (this._traits.length === 0) return 0; // Handle the case where the list is empty
 
-    const total = this._traits.reduce((sum, trait) => sum + trait.weight, 0);
+    const total = this._traits.filter(trait => !trait.isNoGo).reduce((sum, trait) => sum + trait.weight, 0);
     const average = total / this._traits.length;
 
     return average;
