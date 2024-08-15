@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Friend } from '../../friend';
-import { Trait } from '../../trait';
+import { Friend } from '../../types/friend';
+import { Trait } from '../../types/trait';
 
 @Component({
   selector: 'app-analyze-data-container',

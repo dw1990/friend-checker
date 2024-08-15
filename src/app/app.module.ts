@@ -20,6 +20,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AnalyzeDataContainerComponent } from './components/analyze-data-container/analyze-data-container.component';
+import { AddDataContainerComponent } from './components/add-data-container/add-data-container.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AnalyzeDataContainerComponent } from './components/analyze-data-contain
     FileFooterComponent,
     FriendsTableComponent,
     TraitsContainerComponent,
-    AnalyzeDataContainerComponent
+    AnalyzeDataContainerComponent,
+    AddDataContainerComponent
   ],
   imports: [
     BrowserModule,

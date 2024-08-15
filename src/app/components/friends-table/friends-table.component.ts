@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Friend } from '../../friend';
-import { Trait } from '../../trait';
+import { Friend } from '../../types/friend';
+import { Trait } from '../../types/trait';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({

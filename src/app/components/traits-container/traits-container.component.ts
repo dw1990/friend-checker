@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Trait } from '../../trait';
+import { Trait } from '../../types/trait';
 
 
 interface Impact{
