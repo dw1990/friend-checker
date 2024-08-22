@@ -11,7 +11,9 @@ export class AnalysisService {
 
   getStatisticsForTraits(traits: Array<Trait>, friends: Array<Friend>){
     
-    traits.filter(trait => !trait.isNoGo).forEach(trait => {
+    const traitsWithoutNoGoes = traits.filter(trait => !trait.isNoGo)
+
+    traitsWithoutNoGoes.forEach(trait => {
       friends.reduce((sum, friend) => sum + friend[trait.name])
     })
   }

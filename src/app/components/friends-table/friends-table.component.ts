@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Friend } from '../../types/friend';
 import { Trait } from '../../types/trait';
 import { MatTableDataSource } from '@angular/material/table';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-friends-table',
@@ -17,7 +18,6 @@ export class FriendsTableComponent {
   @Output() friendRemoved: EventEmitter<string> = new EventEmitter();
 
   @Input() set friends(friends: Array<Friend>) {
-    console.log(friends);
     this._friends = friends;
     this.dataSource.data = this._friends;
   }
@@ -33,6 +33,10 @@ export class FriendsTableComponent {
     'sum',
     'actions',
   ];
+
+  constructor(private dataService: DataService){
+
+  }
 
   updateDisplayedColumns() {
     this.displayedColumns = [
