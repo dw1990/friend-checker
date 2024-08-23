@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import { Friend } from '../../types/friend';
 
 @Component({
   selector: 'app-add-friends',
@@ -6,13 +8,18 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './add-friends.component.css',
 })
 export class AddFriendsComponent {
-  @Output()
-  friendAdded: EventEmitter<string> = new EventEmitter<string>();
+  
+  constructor(private dataService:DataService){
+
+  }
 
   name = '';
 
   addFriend() {
-    this.friendAdded.emit(this.name);
-    this.name="";
+    const friend: Friend = {
+      name: this.name
+    }
+
+    this.dataService.addFriend(friend)
   }
 }

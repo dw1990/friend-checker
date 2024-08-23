@@ -2,26 +2,17 @@
     <mat-grid-tile [colspan]="3">
       <div class="tile-container">
         <app-friends-table
-          (friendRemoved)="removeFriend($event)"
-          [friends]="friends"
-          [traits]="traits"
         ></app-friends-table>
       </div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2">
       <div class="tile-container">
         <app-traits-container
-          [traits]="traits"
-          (traitAdded)="addTrait($event)"
-          (traitDeleted)="removeTrait($event)"
         ></app-traits-container>
-        <app-add-friends (friendAdded)="addFriend($event)"></app-add-friends>
+        <app-add-friends></app-add-friends>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
   <hr class="separator" />
   <app-file-footer
-    (dataLoaded)="onFileChange($event)"
-    [friends]="friends"
-    [traits]="traits"
   ></app-file-footer>

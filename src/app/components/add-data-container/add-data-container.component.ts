@@ -39,11 +39,14 @@ export class AddDataContainerComponent {
     if (this.friends.find((friend) => friend.name === friendName)) {
       return;
     }
-    console.log(friendName);
     let friend: { name: string; [key: string]: any } = { name: friendName };
 
     this.traits.forEach((trait) => {
-      friend[trait.name] = 0;
+      if(trait.isNoGo){
+        friend[trait.name] = false;
+      }else{
+        friend[trait.name] = 0;
+      }
     });
 
     this.friends.push(friend);
