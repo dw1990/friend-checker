@@ -15,11 +15,8 @@ export class AddFriendsComponent {
 
   name = '';
 
-  addFriend() {
-    const friend: Friend = {
-      name: this.name
-    }
-
-    this.dataService.addFriend(friend)
+  addFriend() {    
+    this.dataService.addFriend(this.name)
+    this.name = ''
   }
 }

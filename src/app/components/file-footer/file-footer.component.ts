@@ -1,23 +1,25 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Friend } from '../../types/friend';
 import { Trait } from '../../types/trait';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-file-footer',
   templateUrl: './file-footer.component.html',
   styleUrl: './file-footer.component.css',
 })
-export class FileFooterComponent {
-  @Input() friends: Array<Friend> = [];
-  @Input() traits: Array<Trait> = [];
+export class FileFooterComponent implements OnInit{
+  friends: Array<Friend> = [];
+  traits: Array<Trait> = [];
 
-  @Output() dataLoaded: EventEmitter<{
-    friends: Array<Friend>;
-    traits: Array<Trait>;
-  }> = new EventEmitter();
+  constructor(private dataService: DataService){}
+  
+  ngOnInit(): void {
+    this.dataService.getFriends$().subscribe(friends => this.friends = friends)
+    this.dataService.getTraits$().subscribe(traits => this.traits = traits)
+  }
 
   downloadJson() {
-    console.log(this.traits)
     const data = {
       friends: this.friends,
       traits: this.traits,
@@ -40,8 +42,8 @@ export class FileFooterComponent {
       reader.onload = (e: any) => {
         const jsonData = JSON.parse(e.target.result);
 
-        this.dataLoaded.emit({friends: jsonData.friends || [], traits: jsonData.traits || []})
-        console.log(jsonData.traits)
+        this.dataService.setFriends(jsonData.friends || [])
+        this.dataService.setTraits(jsonData.traits || [])
       };
       reader.readAsText(file);
     }

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Trait } from '../../types/trait';
+import { DataService } from '../../services/data.service';
 
 
 interface Impact{
@@ -12,17 +13,13 @@ interface Impact{
   templateUrl: './traits-container.component.html',
   styleUrl: './traits-container.component.css',
 })
-export class TraitsContainerComponent {
-
+export class TraitsContainerComponent implements OnInit{
 
   traitNameToAdd =  "";
   selectedImpact: number = 0;
   isNoGo: boolean = false;
 
-  @Input() traits: Array<Trait> = [];
-
-  @Output() traitAdded: EventEmitter<Trait> = new EventEmitter();
-  @Output() traitDeleted: EventEmitter<string> = new EventEmitter();
+  traits: Array<Trait> = [];
 
   impacts: Array<Impact> = [{
     displayText: 'Schadet mir',
@@ -45,6 +42,12 @@ export class TraitsContainerComponent {
     "3": "light-green",
     "-3":"light-red",
     "-7":"dark-red"
+  }
+
+  constructor(private dataService: DataService){}
+  
+  ngOnInit(): void {
+    this.dataService.getTraits$().subscribe((traits) => {this.traits = traits})
   }
 
   getColor(trait: Trait) {
@@ -71,25 +74,16 @@ export class TraitsContainerComponent {
     return "grey"
     }
 
-  removeTrait(name: string) {
-    this.traitDeleted.emit(name);
+  removeTrait(traitName: string) {
+    this.dataService.removeTrait(traitName)
   }
 
-  addTrait() {
-    
-    if (this.traits.find((trait) => trait.name === this.traitNameToAdd)) {
-      return;
-    }
-
-    if(this.traitNameToAdd === ""){
-      return;
-    }
-
-    this.traitAdded.emit({
+  addTrait() {    
+    this.dataService.addTrait({
       name: this.traitNameToAdd,
       weight: this.selectedImpact,
       isNoGo: this.isNoGo
-    });
+    })
 
     this.resetInputs();
   }

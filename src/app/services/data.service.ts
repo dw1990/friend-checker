@@ -7,13 +7,31 @@ import { Trait } from '../types/trait';
   providedIn: 'root'
 })
 export class DataService {
-  
   private _friends: Friend[] = []
   private _traits: Trait[] = []
 
   private friends$: BehaviorSubject<Friend[]> = new BehaviorSubject<Friend[]>(this._friends)
   private traits$: BehaviorSubject<Trait[]> = new BehaviorSubject<Trait[]>(this._traits)
   constructor() { }
+
+  setTraits(traits: Trait[]) {
+    if(traits === undefined){
+      return;
+    }
+
+    this._traits = traits;
+    this.traits$.next([...this._traits])
+  }
+
+  setFriends(friends: Friend[]) {
+    if(friends === undefined){
+      return;
+    }
+
+    this._friends = friends;
+    this.friends$.next([...this._friends])
+  }
+
 
   getFriends$(): Observable<Friend[]>{
     return this.friends$.asObservable();

@@ -9,23 +9,11 @@ import { DataService } from '../../services/data.service';
   templateUrl: './friends-table.component.html',
   styleUrl: './friends-table.component.css',
 })
-export class FriendsTableComponent {
+export class FriendsTableComponent implements OnInit{
   _friends: Array<Friend> = [];
   _traits: Array<Trait> = [];
 
-  dataSource = new MatTableDataSource(this.friends);
-
-  @Output() friendRemoved: EventEmitter<string> = new EventEmitter();
-
-  @Input() set friends(friends: Array<Friend>) {
-    this._friends = friends;
-    this.dataSource.data = this._friends;
-  }
-
-  @Input() set traits(traits: Array<Trait>) {
-    this._traits = traits;
-    this.updateDisplayedColumns();
-  }
+  dataSource = new MatTableDataSource(this._friends);
 
   displayedColumns: string[] = [
     'name',
@@ -35,7 +23,18 @@ export class FriendsTableComponent {
   ];
 
   constructor(private dataService: DataService){
+  }
 
+  ngOnInit(): void {
+    this.dataService.getTraits$().subscribe(traits => {
+      this._traits = traits;
+      this.updateDisplayedColumns();
+    })
+
+    this.dataService.getFriends$().subscribe(friends => {
+      this._friends = friends;
+    this.dataSource.data = this._friends;
+    })
   }
 
   updateDisplayedColumns() {
@@ -108,6 +107,6 @@ export class FriendsTableComponent {
   }
 
   removeFriend(name: string) {
-    this.friendRemoved.emit(name);
+    this.dataService.removeFriend(name)
   }
 }
